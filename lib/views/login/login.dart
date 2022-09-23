@@ -201,7 +201,7 @@ class _LoginState extends State<Login> {
                               errortext2 = "Too Short";
                               errorCtrl2 = true;
                             });
-                          } else if (text.length > 10) {
+                          } else if (text.length > 12) {
                             setState(() {
                               errortext2 = "Too long";
                               errorCtrl2 = true;
@@ -258,12 +258,6 @@ class _LoginState extends State<Login> {
                                 fontFamily: 'Luxia Regular',
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black)),
-                        validator: (pass) {
-                          if (pass!.length < 3 || pass.length > 12) {
-                            return "Invalid Details";
-                          }
-                          return null;
-                        },
                       ),
                     ),
                     Padding(
