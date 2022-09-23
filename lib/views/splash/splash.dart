@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../helpers/shared_services.dart';
 import '../home/home.dart';
@@ -33,9 +34,27 @@ class _splashState extends State<splash> {
   @override
   Widget build(BuildContext context) {
     return SizedBox.expand(
-      child: Image.asset(
-        "assets/Images/BG.png",
-        fit: BoxFit.fitHeight,
+      child: Stack(
+        children: [
+          Positioned(
+            top: 0,
+            right: 0,
+            left: 0,
+            bottom: 0,
+            child: Image.asset(
+              "assets/Images/BG.png",
+              fit: BoxFit.fitHeight,
+            ),
+          ),
+          Center(
+            child: SvgPicture.asset(
+              'assets/Images/icon2.svg',
+              width: 200,
+              height: 200,
+              color: Colors.white,
+            ),
+          )
+        ],
       ),
     );
   }

@@ -1,347 +1,298 @@
-import 'dart:convert';
-
 class Task {
-  Task({
-    required this.data,
-    required this.status,
-    required this.message,
-    required this.statusCode,
-  });
+  Data? data;
+  String? status;
+  String? message;
+  int? statusCode;
 
-  Data data;
-  String status;
-  String message;
-  int statusCode;
+  Task({data, status, message, statusCode});
 
-  // factory Task.fromJson(String str) => Task.fromJson(json.decode(str));
+  Task.fromJson(Map<String, dynamic> json) {
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    status = json['status'];
+    message = json['message'];
+    statusCode = json['statusCode'];
+  }
 
-  String toJson() => json.encode(toMap());
-
-  factory Task.fromJson(Map<String, dynamic> json) => Task(
-        data: Data.fromJson(json["data"]),
-        status: json["status"],
-        message: json["message"],
-        statusCode: json["statusCode"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "data": data.toMap(),
-        "status": status,
-        "message": message,
-        "statusCode": statusCode,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
+    }
+    data['status'] = status;
+    data['message'] = message;
+    data['statusCode'] = statusCode;
+    return data;
+  }
 }
 
 class Data {
-  Data({
-    required this.data,
-    required this.totalItems,
-    required this.pageNo,
-    required this.size,
-    required this.sortBy,
-    required this.direction,
-  });
+  List<Data>? data;
+  int? totalItems;
+  int? pageNo;
+  int? size;
+  String? sortBy;
+  String? direction;
 
-  List<Datum> data;
-  int totalItems;
-  int pageNo;
-  int size;
-  String sortBy;
-  String direction;
+  Data({data, totalItems, pageNo, size, sortBy, direction});
 
-  // factory Data.fromJson(String str) => Data.fromJson(json.decode(str));
+  Data.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(Data.fromJson(v));
+      });
+    }
+    totalItems = json['totalItems'];
+    pageNo = json['pageNo'];
+    size = json['size'];
+    sortBy = json['sortBy'];
+    direction = json['direction'];
+  }
 
-  String toJson() => json.encode(toMap());
-
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-        totalItems: json["totalItems"],
-        pageNo: json["pageNo"],
-        size: json["size"],
-        sortBy: json["sortBy"],
-        direction: json["direction"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "data": List<dynamic>.from(data.map((x) => x.toMap())),
-        "totalItems": totalItems,
-        "pageNo": pageNo,
-        "size": size,
-        "sortBy": sortBy,
-        "direction": direction,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['data'] = this.data!.map((v) => v.toJson()).toList();
+    data['totalItems'] = totalItems;
+    data['pageNo'] = pageNo;
+    data['size'] = size;
+    data['sortBy'] = sortBy;
+    data['direction'] = direction;
+    return data;
+  }
 }
 
-class Datum {
-  Datum({
-    required this.location,
-    required this.claimCode,
-    required this.state,
-    required this.createdby,
-    required this.imageUrl,
-    required this.allowDelivery,
-    required this.shortMessage,
-    required this.ownerMobile,
-    required this.id,
-    required this.address,
-    required this.rating,
-    required this.createdate,
-    required this.description,
-    required this.avgTime,
-    required this.restaurantName,
-    required this.lastupdate,
-    required this.type,
-    required this.allowTakeaway,
-    required this.whatsappNumber,
-    required this.isLive,
-    required this.pics,
-    required this.restaurantId,
-    required this.isOnline,
-    required this.neighbourhood,
-    required this.updatedby,
-    required this.pincode,
-    required this.allowReservations,
-    required this.city,
-    required this.claimedEmails,
-    required this.gstPercent,
-    required this.ownerEmail,
-    required this.owner,
-    required this.serviceChargePercent,
-    required this.geohash,
-    required this.claimed,
-    required this.online,
-    required this.isOpen,
-  });
-
-  Location location;
-  String claimCode;
-  String state;
-  String createdby;
-  String imageUrl;
-  bool allowDelivery;
-  String shortMessage;
-  String ownerMobile;
-  String id;
-  String address;
-  double rating;
-  Date? createdate;
-  String description;
-  dynamic avgTime;
-  String restaurantName;
-  Date lastupdate;
+class Data2 {
+  Location? location;
+  String? claimCode;
+  String? state;
+  String? createdby;
+  String? imageUrl;
+  bool? allowDelivery;
+  String? shortMessage;
+  String? ownerMobile;
+  String? id;
+  String? address;
+  double? rating;
+  Createdate? createdate;
+  String? description;
+  String? avgTime;
+  String? restaurantName;
+  Createdate? lastupdate;
   List<String>? type;
-  bool allowTakeaway;
-  dynamic whatsappNumber;
-  bool isLive;
-  List<String> pics;
-  String restaurantId;
-  bool isOnline;
-  String neighbourhood;
-  String updatedby;
-  dynamic pincode;
-  bool allowReservations;
-  String city;
-  List<ClaimedEmail>? claimedEmails;
-  double gstPercent;
-  String ownerEmail;
-  String owner;
-  int serviceChargePercent;
-  String geohash;
-  bool claimed;
-  bool online;
-  bool isOpen;
+  bool? allowTakeaway;
+  String? whatsappNumber;
+  bool? isLive;
+  List<String>? pics;
+  String? restaurantId;
+  bool? isOnline;
+  String? neighbourhood;
+  String? updatedby;
+  String? pincode;
+  bool? allowReservations;
+  String? city;
+  List<ClaimedEmails>? claimedEmails;
+  double? gstPercent;
+  String? ownerEmail;
+  String? owner;
+  int? serviceChargePercent;
+  String? geohash;
+  bool? claimed;
+  bool? online;
+  bool? isOpen;
 
-  // factory Datum.fromJson(String str) => Datum.fromJson(json.decode(str));
+  Data2(
+      {location,
+      claimCode,
+      state,
+      createdby,
+      imageUrl,
+      allowDelivery,
+      shortMessage,
+      ownerMobile,
+      id,
+      address,
+      rating,
+      createdate,
+      description,
+      avgTime,
+      restaurantName,
+      lastupdate,
+      type,
+      allowTakeaway,
+      whatsappNumber,
+      isLive,
+      pics,
+      restaurantId,
+      isOnline,
+      neighbourhood,
+      updatedby,
+      pincode,
+      allowReservations,
+      city,
+      claimedEmails,
+      gstPercent,
+      ownerEmail,
+      owner,
+      serviceChargePercent,
+      geohash,
+      claimed,
+      online,
+      isOpen});
 
-  String toJson() => json.encode(toMap());
+  Data2.fromJson(Map<String, dynamic> json) {
+    location =
+        json['location'] != null ? Location.fromJson(json['location']) : null;
+    claimCode = json['Claim Code'];
+    state = json['state'];
+    createdby = json['createdby'];
+    imageUrl = json['imageUrl'];
+    allowDelivery = json['allowDelivery'];
+    shortMessage = json['shortMessage'];
+    ownerMobile = json['ownerMobile'];
+    id = json['id'];
+    address = json['address'];
+    rating = json['rating'];
+    createdate = json['createdate'] != null
+        ? Createdate.fromJson(json['createdate'])
+        : null;
+    description = json['description'];
+    avgTime = json['avgTime'];
+    restaurantName = json['restaurantName'];
+    lastupdate = json['lastupdate'] != null
+        ? Createdate.fromJson(json['lastupdate'])
+        : null;
+    type = json['type'].cast<String>();
+    allowTakeaway = json['allowTakeaway'];
+    whatsappNumber = json['whatsappNumber'];
+    isLive = json['isLive'];
+    pics = json['pics'].cast<String>();
+    restaurantId = json['restaurantId'];
+    isOnline = json['isOnline'];
+    neighbourhood = json['neighbourhood'];
+    updatedby = json['updatedby'];
+    pincode = json['pincode'];
+    allowReservations = json['allowReservations'];
+    city = json['city'];
+    if (json['claimedEmails'] != null) {
+      claimedEmails = <ClaimedEmails>[];
+      json['claimedEmails'].forEach((v) {
+        claimedEmails!.add(ClaimedEmails.fromJson(v));
+      });
+    }
+    gstPercent = json['gstPercent'];
+    ownerEmail = json['ownerEmail'];
+    owner = json['owner'];
+    serviceChargePercent = json['serviceChargePercent'];
+    geohash = json['geohash'];
+    claimed = json['claimed'];
+    online = json['online'];
+    isOpen = json['isOpen'];
+  }
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-        location: Location.fromJson(json["location"]),
-        claimCode: json["Claim Code"],
-        state: json["state"] == null ? null : json["state"],
-        createdby: json["createdby"] == null ? null : json["createdby"],
-        imageUrl: json["imageUrl"],
-        allowDelivery: json["allowDelivery"],
-        shortMessage:
-            json["shortMessage"] == null ? null : json["shortMessage"],
-        ownerMobile: json["ownerMobile"],
-        id: json["id"],
-        address: json["address"],
-        rating: json["rating"].toDouble(),
-        createdate: json["createdate"] == null
-            ? null
-            : Date.fromJson(json["createdate"]),
-        description: json["description"],
-        avgTime: json["avgTime"],
-        restaurantName: json["restaurantName"],
-        lastupdate: Date.fromJson(json["lastupdate"]),
-        type: json["type"] == null
-            ? null
-            : List<String>.from(json["type"].map((x) => x)),
-        allowTakeaway: json["allowTakeaway"],
-        whatsappNumber: json["whatsappNumber"],
-        isLive: json["isLive"],
-        pics: List<String>.from(json["pics"].map((x) => x)),
-        restaurantId:
-            json["restaurantId"] == null ? null : json["restaurantId"],
-        isOnline: json["isOnline"],
-        neighbourhood:
-            json["neighbourhood"] == null ? null : json["neighbourhood"],
-        updatedby: json["updatedby"],
-        pincode: json["pincode"],
-        allowReservations: json["allowReservations"],
-        city: json["city"],
-        claimedEmails: json["claimedEmails"] == null
-            ? null
-            : List<ClaimedEmail>.from(
-                json["claimedEmails"].map((x) => ClaimedEmail.fromJson(x))),
-        gstPercent:
-            json["gstPercent"] == null ? null : json["gstPercent"].toDouble(),
-        ownerEmail: json["ownerEmail"] == null ? null : json["ownerEmail"],
-        owner: json["owner"] == null ? null : json["owner"],
-        serviceChargePercent: json["serviceChargePercent"] == null
-            ? null
-            : json["serviceChargePercent"],
-        geohash: json["geohash"] == null ? null : json["geohash"],
-        claimed: json["claimed"] == null ? null : json["claimed"],
-        online: json["online"] == null ? null : json["online"],
-        isOpen: json["isOpen"] == null ? null : json["isOpen"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "location": location.toMap(),
-        "Claim Code": claimCode,
-        "state": state == null ? null : state,
-        "createdby": createdby == null ? null : createdby,
-        "imageUrl": imageUrl,
-        "allowDelivery": allowDelivery,
-        "shortMessage": shortMessage == null ? null : shortMessage,
-        "ownerMobile": ownerMobile,
-        "id": id,
-        "address": address,
-        "rating": rating,
-        "createdate": createdate == null ? null : createdate?.toMap(),
-        "description": description,
-        "avgTime": avgTime,
-        "restaurantName": restaurantName,
-        "lastupdate": lastupdate.toMap(),
-        "type": type == null ? null : List<dynamic>.from(type!.map((x) => x)),
-        "allowTakeaway": allowTakeaway,
-        "whatsappNumber": whatsappNumber,
-        "isLive": isLive,
-        "pics": List<dynamic>.from(pics.map((x) => x)),
-        "restaurantId": restaurantId == null ? null : restaurantId,
-        "isOnline": isOnline,
-        "neighbourhood": neighbourhood == null ? null : neighbourhood,
-        "updatedby": updatedby,
-        "pincode": pincode,
-        "allowReservations": allowReservations,
-        "city": city,
-        "claimedEmails": claimedEmails == null
-            ? null
-            : List<dynamic>.from(claimedEmails!.map((x) => x.toMap())),
-        "gstPercent": gstPercent ?? null,
-        "ownerEmail": ownerEmail ?? null,
-        "owner": owner ?? null,
-        "serviceChargePercent": serviceChargePercent ?? null,
-        "geohash": geohash ?? null,
-        "claimed": claimed == null ? null : claimed,
-        "online": online == null ? null : online,
-        "isOpen": isOpen == null ? null : isOpen,
-      };
-}
-
-class ClaimedEmail {
-  ClaimedEmail({
-    required this.email,
-    required this.uid,
-  });
-
-  String email;
-  String uid;
-
-  // factory ClaimedEmail.fromJson(String str) =>
-  //     ClaimedEmail.fromJson(json.decode(str));
-
-  String toJson() => json.encode(toMap());
-
-  factory ClaimedEmail.fromJson(Map<String, dynamic> json) => ClaimedEmail(
-        email: json["email"],
-        uid: json["uid"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "email": email,
-        "uid": uid,
-      };
-}
-
-class Date {
-  Date({
-    required this.seconds,
-    required this.nanoseconds,
-  });
-
-  int seconds;
-  int nanoseconds;
-
-  // factory Date.fromJson(String str) => Date.fromJson(json.decode(str));
-
-  String toJson() => json.encode(toMap());
-
-  factory Date.fromJson(Map<String, dynamic> json) => Date(
-        seconds: json["_seconds"],
-        nanoseconds: json["_nanoseconds"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "_seconds": seconds,
-        "_nanoseconds": nanoseconds,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (location != null) {
+      data['location'] = location!.toJson();
+    }
+    data['Claim Code'] = claimCode;
+    data['state'] = state;
+    data['createdby'] = createdby;
+    data['imageUrl'] = imageUrl;
+    data['allowDelivery'] = allowDelivery;
+    data['shortMessage'] = shortMessage;
+    data['ownerMobile'] = ownerMobile;
+    data['id'] = id;
+    data['address'] = address;
+    data['rating'] = rating;
+    if (createdate != null) {
+      data['createdate'] = createdate!.toJson();
+    }
+    data['description'] = description;
+    data['avgTime'] = avgTime;
+    data['restaurantName'] = restaurantName;
+    if (lastupdate != null) {
+      data['lastupdate'] = lastupdate!.toJson();
+    }
+    data['type'] = type;
+    data['allowTakeaway'] = allowTakeaway;
+    data['whatsappNumber'] = whatsappNumber;
+    data['isLive'] = isLive;
+    data['pics'] = pics;
+    data['restaurantId'] = restaurantId;
+    data['isOnline'] = isOnline;
+    data['neighbourhood'] = neighbourhood;
+    data['updatedby'] = updatedby;
+    data['pincode'] = pincode;
+    data['allowReservations'] = allowReservations;
+    data['city'] = city;
+    if (claimedEmails != null) {
+      data['claimedEmails'] = claimedEmails!.map((v) => v.toJson()).toList();
+    }
+    data['gstPercent'] = gstPercent;
+    data['ownerEmail'] = ownerEmail;
+    data['owner'] = owner;
+    data['serviceChargePercent'] = serviceChargePercent;
+    data['geohash'] = geohash;
+    data['claimed'] = claimed;
+    data['online'] = online;
+    data['isOpen'] = isOpen;
+    return data;
+  }
 }
 
 class Location {
-  Location({
-    required this.latitude,
-    required this.longitude,
-  });
+  double? dLatitude;
+  double? dLongitude;
 
-  double latitude;
-  double longitude;
+  Location({dLatitude, dLongitude});
 
-  // factory Location.fromJson(String str) => Location.fromJson(json.decode(str));
+  Location.fromJson(Map<String, dynamic> json) {
+    dLatitude = json['_latitude'];
+    dLongitude = json['_longitude'];
+  }
 
-  String toJson() => json.encode(toMap());
-
-  factory Location.fromJson(Map<String, dynamic> json) => Location(
-        latitude: json["_latitude"].toDouble(),
-        longitude: json["_longitude"].toDouble(),
-      );
-
-  Map<String, dynamic> toMap() => {
-        "_latitude": latitude,
-        "_longitude": longitude,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_latitude'] = dLatitude;
+    data['_longitude'] = dLongitude;
+    return data;
+  }
 }
 
-class WhatsappNumberElement {
-  WhatsappNumberElement({
-    required this.number,
-  });
+class Createdate {
+  int? iSeconds;
+  int? iNanoseconds;
 
-  String number;
+  Createdate({iSeconds, iNanoseconds});
 
-  // factory WhatsappNumberElement.fromJson(String str) =>
-  //     WhatsappNumberElement.fromJson(json.decode(str));
+  Createdate.fromJson(Map<String, dynamic> json) {
+    iSeconds = json['_seconds'];
+    iNanoseconds = json['_nanoseconds'];
+  }
 
-  String toJson() => json.encode(toMap());
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_seconds'] = iSeconds;
+    data['_nanoseconds'] = iNanoseconds;
+    return data;
+  }
+}
 
-  factory WhatsappNumberElement.fromJson(Map<String, dynamic> json) =>
-      WhatsappNumberElement(
-        number: json["number"],
-      );
+class ClaimedEmails {
+  String? email;
+  String? uid;
 
-  Map<String, dynamic> toMap() => {
-        "number": number,
-      };
+  ClaimedEmails({email, uid});
+
+  ClaimedEmails.fromJson(Map<String, dynamic> json) {
+    email = json['email'];
+    uid = json['uid'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['email'] = email;
+    data['uid'] = uid;
+    return data;
+  }
 }

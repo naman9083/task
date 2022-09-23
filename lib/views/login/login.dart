@@ -268,38 +268,40 @@ class _LoginState extends State<Login> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 25),
-                      child: ElevatedButton(
+                      child: OutlinedButton(
                         style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          )),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.black),
-                        ),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                            )),
+                            backgroundColor:
+                                errorCtrl2 != true && errorCtrl1 != true
+                                    ? MaterialStateProperty.all(Colors.purple)
+                                    : MaterialStateProperty.all(Colors.black)),
                         onPressed: () {
-                          if (customSignIn()) {
-                            Fluttertoast.showToast(
-                                msg: "Welcome to Flunkey Restro",
-                                backgroundColor: Colors.green,
-                                gravity: ToastGravity.BOTTOM,
-                                textColor: Colors.white,
-                                timeInSecForIosWeb: 1,
-                                fontSize: 16.0,
-                                toastLength: Toast.LENGTH_SHORT);
-                            putUsertoLocal();
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const Home()));
-                          } else {
-                            Fluttertoast.showToast(
-                                msg: "Invalid Details",
-                                backgroundColor: Colors.red,
-                                gravity: ToastGravity.BOTTOM,
-                                textColor: Colors.white,
-                                timeInSecForIosWeb: 1,
-                                fontSize: 16.0,
-                                toastLength: Toast.LENGTH_SHORT);
+                          if (errorCtrl1 != true && errorCtrl2 != true) {
+                            if (customSignIn()) {
+                              Fluttertoast.showToast(
+                                  msg: "Welcome to Flunkey Restro",
+                                  backgroundColor: Colors.green,
+                                  gravity: ToastGravity.BOTTOM,
+                                  textColor: Colors.white,
+                                  timeInSecForIosWeb: 1,
+                                  fontSize: 16.0,
+                                  toastLength: Toast.LENGTH_SHORT);
+                              putUsertoLocal();
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const Home()));
+                            } else {
+                              Fluttertoast.showToast(
+                                  msg: "Invalid Details",
+                                  backgroundColor: Colors.red,
+                                  gravity: ToastGravity.BOTTOM,
+                                  textColor: Colors.white,
+                                  timeInSecForIosWeb: 1,
+                                  fontSize: 16.0,
+                                  toastLength: Toast.LENGTH_SHORT);
+                            }
                           }
                         },
                         child: Container(
